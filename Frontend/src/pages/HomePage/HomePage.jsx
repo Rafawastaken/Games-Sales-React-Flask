@@ -1,9 +1,10 @@
 import BlueContainer from "../../components/BlueContainer/BlueContainer";
+import GamesWatchlist from "../../components/GamesWatchlist/GamesWatchlist";
 
 const HomePage = () => {
   return (
-    <BlueContainer title={"Games in Watchlist"}>
-      Games will be displayed here
+    <BlueContainer title={"Games on Watchlist"}>
+      <GamesWatchlist />
     </BlueContainer>
   );
 };
