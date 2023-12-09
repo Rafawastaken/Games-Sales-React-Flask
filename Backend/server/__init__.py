@@ -24,4 +24,5 @@ with app.app_context():
     # Api endpoints
     app.register_blueprint(api_bp)
 
-    api.add_resource(GameApi, "/api/games")
+    api.add_resource(GameApi, "/api/games", endpoint = 'games')
+    # api.add_resource(GameApi, "/api/games/<int:id>", endpoint = 'game_detail')

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Table, Td, Tr, Th, Thead, Tbody, Image, Text } from "@chakra-ui/react";
+
 import { GET_GAMES } from "../../endpoints/endpoints";
+
+import RemoveBtn from "../RemoveBtn/RemoveBtn";
 import LinkButton from "../LinkButton/LinkButton";
 
 const GamesWatchlist = () => {
@@ -22,30 +25,35 @@ const GamesWatchlist = () => {
 
   return (
     <>
-      <Table
-        w={"full"}
-        variant="striped"
-        colorScheme="blue"
-        borderWidth={"2px"}
-      >
-        <Thead>
-          <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
-            Image
-          </Th>
-          <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
-            Title
-          </Th>
-          <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
-            Current Price
-          </Th>
-          <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
-            Lowest Price
-          </Th>
-          <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
-            Get it
-          </Th>
-        </Thead>
-        {games ? (
+      {games ? (
+        <Table
+          w={"full"}
+          variant="striped"
+          colorScheme="blue"
+          borderWidth={"2px"}
+        >
+          <Thead>
+            <Tr>
+              <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
+                Image
+              </Th>
+              <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
+                Title
+              </Th>
+              <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
+                Current Price
+              </Th>
+              <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
+                Lowest Price
+              </Th>
+              <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
+                Get it
+              </Th>
+              <Th fontSize={14} py={5} color={"white"} textAlign={"center"}>
+                Remove
+              </Th>
+            </Tr>
+          </Thead>
           <Tbody>
             {games.map((game) => (
               <Tr key={game.id} borderBottom={"2px solid #ffffff84"}>
@@ -58,13 +66,16 @@ const GamesWatchlist = () => {
                 <Td textAlign={"center"}>
                   <LinkButton target={game.link} text={"Buy it"} />
                 </Td>
+                <Td textAlign={"center"}>
+                  <RemoveBtn id={game.id} />
+                </Td>
               </Tr>
             ))}
           </Tbody>
-        ) : (
-          <Text>Loading...</Text>
-        )}
-      </Table>
+        </Table>
+      ) : (
+        <Text>Loading...</Text>
+      )}
     </>
   );
 };

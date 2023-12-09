@@ -1,6 +1,6 @@
 from server import db
-from flask import Blueprint, jsonify
-from flask_restful import Resource, reqparse, abort, marshal_with, fields
+from flask import Blueprint
+from flask_restful import Resource, reqparse, marshal_with, fields
 from .models import Game
 
 # Api blueprint
@@ -17,11 +17,14 @@ game_resource_fields = {
 
 
 class GameApi(Resource):
+
+    # Endpoint to get all games
     @marshal_with(game_resource_fields)
     def get(self):
         games = Game.query.all()
         return games, 200
 
+    # Endpoint to POST new game
     @marshal_with(game_resource_fields)
     def post(self):
             parser = reqparse.RequestParser()
@@ -29,7 +32,6 @@ class GameApi(Resource):
             parser.add_argument('link', type=str, required=True, help='Link is required')
             parser.add_argument('header_img', type=str, required=True, help='Header image URL is required')
             parser.add_argument('current_price', type=str, required=True, help='Current price is required')
-            parser.add_argument('lowest_price', type=str, required=True, help='Lowest price is required')
 
             args = parser.parse_args()
 
@@ -39,7 +41,7 @@ class GameApi(Resource):
                 link=args['link'],
                 header_img=args['header_img'],
                 current_price=args['current_price'],
-                lowest_price=args['lowest_price']
+                lowest_price=args['current_price']
             )
 
             # Add the new game to the database
@@ -47,3 +49,21 @@ class GameApi(Resource):
             db.session.commit()
 
             return new_game, 201
+
+    # Endpoint to delete game
+    def delete(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('id', type=int, required=True, help="Game ID is required")
+        args = parser.parse_args()
+
+        # Retrieve the game by ID
+        game = Game.query.get(args['id'])
+
+        if game:
+            # Delete the game from the database
+            db.session.delete(game)
+            db.session.commit()
+
+            return {"message": "Game deleted successfully"}, 200
+        else:
+            return {"error": "Game not found"}, 404

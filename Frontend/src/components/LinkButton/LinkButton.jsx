@@ -5,10 +5,10 @@ const LinkButton = ({ text, target }) => {
     <Link
       href={target}
       target="_blank"
-      py={3}
-      px={4}
-      bg={"#445deb"}
-      border={"1px solid #9aa8fc"}
+      py={2}
+      px={3}
+      bg={"#3146be"}
+      border={"1px solid #243cc2"}
       rounded={"md"}
       textTransform={"uppercase"}
       fontWeight={"bold"}
