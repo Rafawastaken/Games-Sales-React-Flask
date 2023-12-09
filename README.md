@@ -10,7 +10,7 @@ The frontend of the application is built using React, a popular JavaScript libra
 
 1. Navigate to the "frontend" folder.
 2. Install dependencies using `npm install`.
-3. Start the development server with `npm start`.
+3. Start the development server with `npm run dev`.
 4. Access the web application at [http://localhost:3000](http://localhost:3000).
 
 ## Backend (Flask)
@@ -72,3 +72,6 @@ The API responses follow the following resource fields:
   "lowest_price": "39.99€"
 }
 ```
+
+---
+Feel free to explore and enhance the project according to your needs! If you have any questions or issues, please refer to the documentation of React, Flask, Flask-RESTful, and Flask-SQLAlchemy or reach out for support. Happy coding!
